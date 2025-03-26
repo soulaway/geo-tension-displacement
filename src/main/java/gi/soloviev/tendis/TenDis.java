@@ -28,7 +28,8 @@ public class TenDis {
 			double u = 0;
 			double w = 0;
 			double fi = 0;
-			out.printf("%5s %5s %10s %10s %10s %10s %10s%n", "X", "Z", "SIGZ", "SIGX", "TAUXZ", "U", "W");
+			out.printf("%1s %5s %1s %5s %1s %10s %1s %10s %1s %10s %1s %10s %1s %10s %1s%n", "|", "X", "|", "Z", "|",
+					"SIGZ", "|", "SIGX", "|", "TAUXZ", "|", "U", "|", "W", "|");
 			for (int j = 0; j < z.length; j++) {
 				for (int i = 0; i < x.length; i++) {
 					ro = calcRo(x[i], z[j]);
@@ -38,7 +39,7 @@ public class TenDis {
 					tXZ = calcTauXZ(x[i], z[j], ro, fi);
 					u = calcU(x[i], ro, fi);
 					w = calcW(z[j], ro, fi);
-					out.printf("%5.1f %5.1f %10.3f %10.3f %10.3f %10.3f %10.3f%n", x[i], z[j], sZ, sX, tXZ, u, w);
+					out.printf("%1s %5.1f %1s %5.1f %1s %10.3f %1s %10.3f %1s %10.3f %1s %10.3f %1s %10.3f %1s%n", "|", x[i], "|", z[j], "|", sZ, "|", sX, "|", tXZ, "|", u, "|", w, "|");
 				}
 			}
 			return baos.toString();
@@ -86,9 +87,10 @@ public class TenDis {
 	 * @param fi аргумент комплексного числа
 	 * @return вертикальное напряжение
 	 */
-    static double calcSigmaZ(double x, double z, double ro, double fi) {
-        return -z / Math.pow(ro, 1.5) * Math.sin(1.5 * fi) - (x * Math.cos(0.5 * fi) + z * Math.sin(0.5 * fi)) / Math.sqrt(ro);
-    }
+	static double calcSigmaZ(double x, double z, double ro, double fi) {
+		return -z / Math.pow(ro, 1.5) * Math.sin(1.5 * fi)
+				- (x * Math.cos(0.5 * fi) + z * Math.sin(0.5 * fi)) / Math.sqrt(ro);
+	}
 
 	/**
 	 * Calculates the horizontal stress component (σₓ)
@@ -99,9 +101,10 @@ public class TenDis {
 	 * @param fi argument of complex number
 	 * @return horizontal stress component
 	 */
-    static double calcSigmaX(double x, double z, double ro, double fi) {
-        return -z / Math.pow(ro, 1.5) * Math.sin(1.5 * fi) - (x * Math.cos(0.5 * fi) - z * Math.sin(0.5 * fi)) / Math.sqrt(ro);
-    }
+	static double calcSigmaX(double x, double z, double ro, double fi) {
+		return -z / Math.pow(ro, 1.5) * Math.sin(1.5 * fi)
+				- (x * Math.cos(0.5 * fi) - z * Math.sin(0.5 * fi)) / Math.sqrt(ro);
+	}
 
 	/**
 	 * 
@@ -110,10 +113,9 @@ public class TenDis {
 	 * @param fi аргумент комплексного числа
 	 * @return касательное напряжение
 	 */
-    static double calcTauXZ(double x, double z, double ro, double fi) {
-        return -z / Math.pow(ro, 1.5) * Math.cos(1.5 * fi);
-    }
-
+	static double calcTauXZ(double x, double z, double ro, double fi) {
+		return -z / Math.pow(ro, 1.5) * Math.cos(1.5 * fi);
+	}
 
 	/**
 	 * 
